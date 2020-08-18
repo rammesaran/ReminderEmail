@@ -1,24 +1,23 @@
-enum TransactionStatus { pending, success, error }
-
 class TransactionModel {
-  int transactionid;
-  String transactionDescription;
-
-  TransactionStatus status;
-  String datetime;
+  final int id;
+  final String transactionDescription;
+  final String transactionStatus;
 
   TransactionModel(
-      {this.datetime,
-      this.status,
-      this.transactionDescription,
-      this.transactionid});
+      {this.id, this.transactionDescription, this.transactionStatus});
 
   Map<String, dynamic> toMap() {
     return {
-      'id': transactionid,
-      'description': transactionDescription,
-      'transactionstatus': status,
-      'dateAndTime': datetime,
+      'id': id,
+      'transactionDescription': transactionDescription,
+      'transactionStatus': transactionStatus,
     };
   }
+
+  factory TransactionModel.fromMap(Map<String, dynamic> json) =>
+      new TransactionModel(
+        id: json["id"],
+        transactionDescription: json["transactionDescription"],
+        transactionStatus: json["transactionStatus"],
+      );
 }
